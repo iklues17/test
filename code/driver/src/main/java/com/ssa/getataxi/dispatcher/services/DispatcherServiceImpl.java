@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import net.chrisrichardson.getataxi.events.Event;
 import net.chrisrichardson.getataxi.events.EventEnvelope;
+import net.chrisrichardson.getataxi.events.EventPublisher;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

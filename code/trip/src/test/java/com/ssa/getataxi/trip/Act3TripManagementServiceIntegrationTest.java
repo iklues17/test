@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ssa.getataxi.trip.config.TripMongoDbTestConfiguration;
 import com.ssa.getataxi.trip.domain.Trip;
+import com.ssa.getataxi.trip.domain.TripMother;
 import com.ssa.getataxi.trip.repositories.TripRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)

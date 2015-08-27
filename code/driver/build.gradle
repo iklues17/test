@@ -13,6 +13,7 @@ apply plugin: 'spring-boot'
 
 dependencies {
     compile project(":util")
+    compile project(":util-service")
     compile project(":util-swagger")
     compile project(":domain-events")
 

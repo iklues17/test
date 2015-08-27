@@ -5,11 +5,13 @@ import java.util.List;
 
 import net.chrisrichardson.getataxi.domain.Location;
 import net.chrisrichardson.getataxi.events.Event;
+import net.chrisrichardson.getataxi.events.EventPublisher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssa.getataxi.commondomain.events.TripCreatedEvent;
+import com.ssa.getataxi.trip.domain.Passenger;
 import com.ssa.getataxi.trip.domain.Trip;
 import com.ssa.getataxi.trip.repositories.PassengerRepository;
 import com.ssa.getataxi.trip.repositories.TripRepository;
@@ -22,6 +24,11 @@ public class TripManagementServiceImpl implements TripManagementService {
 	
 	@Autowired
 	private PassengerRepository passengerRepository;
+
+	@Autowired
+	private EventPublisher eventPublisher;
+	
+	public TripManagementServiceImpl(){}
 	
 	public TripManagementServiceImpl(TripRepository tripRepository,
 			PassengerRepository passengerRepository) {
@@ -32,6 +39,16 @@ public class TripManagementServiceImpl implements TripManagementService {
 	@Override
 	public Trip createTrip(String passengerId, Location pickupLocation) {
 		
+		//1. verify passenger
+		Passenger passenger = passengerRepository.findById(passengerId);
+		if(!passenger.isAccountEnabled()){
+//			throw new Exception("Account is disabled");
+			System.out.println("Account is disabled");
+		}
+		// TODO
+//		tripRepository.findActiveTrips();
+
+		//2. create new trip
 		Trip newTrip = new Trip();
 		newTrip.setPassengerId(passengerId);
 		newTrip.setPickupLocation(pickupLocation);
@@ -40,7 +57,6 @@ public class TripManagementServiceImpl implements TripManagementService {
 		events.add(new TripCreatedEvent(passengerId, pickupLocation));
 		
 		tripRepository.add(newTrip, events);
-		passengerRepository.findById(passengerId);
 		
 		return newTrip ;
 	}
