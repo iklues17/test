@@ -1,0 +1,39 @@
+public interface PassengerService
+	public register(UserInfo userinfo)
+	public viewTripList(String ID)
+
+
+public interface DriverService
+	public register(UserInfo userinfo)
+	public viewTripList(String ID)
+	public updateClockInfo(String ID, String TripID, bloolean clock)
+	public updateDriverAction(String ID, String TrpID, "code Accept, Reject, Pick, DropOff")
+	public updateDriverLocation(String ID, LocationInfo locationinfo)
+	public getDriverList(LocationInfo locationinfo)
+
+
+
+public interface TripService
+	public createTrip(TripiInfo tripinfo)
+	public updateTripStatus(String TripID, "code Accept, Reject, Pick, DropOff")
+	public addWayPoint(String TripID, LocationInfo locationinfo)
+	public viewTrip(String TripID)
+
+
+public interface BillService
+	public StartBill(String TripID, String UserID)
+	public EndBill(String TripID, String UserID)
+	public getBill(String BillID)
+
+
+
+
+public interface PaymentService
+	public RequestPayment(String TripID, String UserID)
+	
+	
+	
+
+
+
+

@@ -1,0 +1,16 @@
+mongodb:
+  image: mongo:3.0.4
+  command: --smallfiles --master
+  ports:
+    - "27017:27017"
+
+rabbitmq:
+  image: rabbitmq:3.5.3
+  ports:
+    - "5672:5672"
+    - "15672:15672"
+
+eureka:
+  image: springcloud/eureka
+  ports:
+    - "8761:8761"

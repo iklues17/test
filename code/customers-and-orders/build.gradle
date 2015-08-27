@@ -1,0 +1,37 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.4.RELEASE")
+    }
+}
+
+apply plugin: 'spring-boot'
+
+if (project.hasProperty('localMavenRepoUrl')) {
+
+    apply plugin: 'maven'
+
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                repository(url: localMavenRepoUrl)
+            }
+        }
+    }
+}
+
+dependencies {
+    compile project(":util")
+//    compile project (":util-service")
+    compile project(":util-swagger")
+
+    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    compile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
+
+    testCompile project(":util-test")
+    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+
+}

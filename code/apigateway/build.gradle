@@ -1,0 +1,60 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.4.RELEASE")
+        classpath "io.spring.gradle:dependency-management-plugin:0.4.0.RELEASE"
+
+        classpath 'com.bmuschko:gradle-docker-plugin:2.5'
+
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+apply plugin: 'spring-boot'
+apply plugin: 'com.bmuschko.docker-remote-api'
+
+apply plugin: "io.spring.dependency-management"
+
+// Needed this because depending on service-util is insufficient!?
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-starter-parent:Angel.SR3'
+    }
+}
+
+dependencies {
+    compile project (":util")
+    compile project (":util-service")
+    compile project (":util-swagger")
+
+    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    compile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
+
+
+    testCompile project (":util-test")
+    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    testCompile 'au.com.dius:pact-jvm-consumer-junit_2.11:2.2.10'
+
+}
+
+import com.bmuschko.gradle.docker.tasks.image.*
+
+docker {
+    if (System.getenv('DOCKER_HOST') != null)
+        url = System.getenv('DOCKER_HOST').replace("tcp:", "https:")
+
+    if (System.getenv('DOCKER_CERT_PATH') != null)
+        certPath = file(System.getenv('DOCKER_CERT_PATH'))
+}
+
+task buildImage(type: DockerBuildImage) {
+    inputDir = file(".")
+    tag = 'apigateway'
+}

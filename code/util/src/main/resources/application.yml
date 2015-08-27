@@ -1,0 +1,14 @@
+passenger_service:
+  url: http://passenger-service:8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  application:
+    name: trip-management-service
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost/userregistration

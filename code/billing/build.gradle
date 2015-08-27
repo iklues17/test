@@ -1,0 +1,38 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+  compile project (":util")
+  compile project(":util-swagger")
+  compile project (":domain-events")
+  compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+  compile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
+  
+  testCompile project (":util-test")
+  testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}

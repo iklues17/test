@@ -1,0 +1,16 @@
+include "util"
+include "util-test"
+include "util-service"
+include "util-swagger"
+
+include "customers-and-orders"
+
+include "domain-events"
+include "trip-management"
+include "passenger-management"
+include "driver-management"
+include "dispatcher"
+
+include "apigateway"
+
+rootProject.name = "get-a-taxi"

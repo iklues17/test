@@ -1,0 +1,12 @@
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-data-mongodb:$springBootVersion"
+    compile "com.fasterxml.jackson.core:jackson-core:2.4.3"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.4.3"
+    compile "org.springframework.boot:spring-boot-starter-aop:$springBootVersion"
+
+    compile "org.springframework.boot:spring-boot-starter-amqp:$springBootVersion"
+
+    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+
+
+}
