@@ -19,7 +19,7 @@ public class ApiGatewayMain {
   @Bean
   public ProxyClient proxyClient(RestTemplate restTemplate) {
     Map<String, String> routes = new HashMap<>();
-    routes.put("trips", "TRIP-MANAGEMENT");
+    routes.put("passengers", "PASSENGER-MANAGEMENT");
     return new ProxyClientImpl(restTemplate, routes);
   }
   public static void main(String[] args) {
